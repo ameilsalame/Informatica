@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conteggio dei numeri primi</title>
+</head>
+<body>
+
+    <div id="output">
+     
+    </div>
+
+    <script>
+        function contaNumeriPrimiTra(inizio, fine) {
+            let numeriPrimi = [];
+            for (let numero = inizio; numero <= fine; numero++) {
+                if (isPrimo(numero)) {
+                    numeriPrimi.push(numero);
+                }
+            }
+            return numeriPrimi.length;
+        }
+
+        function isPrimo(numero) {
+            if (numero <= 1) return false;
+            if (numero <= 3) return true;
+
+            if (numero % 2 === 0 || numero % 3 === 0) return false;
+
+            for (let i = 5; i * i <= numero; i += 6) {
+                if (numero % i === 0 || numero % (i + 2) === 0) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        let outputDiv = document.getElementById("output");
+        let conteggioTotale = 0;
+        for (let i = 0; i <= 10000; i += 100) {
+            let inizio = i;
+            let fine = Math.min(i + 100, 10000);
+            let conteggio = contaNumeriPrimiTra(inizio, fine);
+            conteggioTotale += conteggio;
+            outputDiv.innerHTML += "<p>Intervallo " + inizio + " - " + fine + ": " + conteggio + " numeri primi.</p>";
+        }
+        outputDiv.innerHTML += "<p>Totale numeri primi: " + conteggioTotale + "</p>";
+    </script>
+</body>
+</html>
