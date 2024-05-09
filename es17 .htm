@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quadrati Colorati</title>
+<style>
+    .square {
+        width: 30px;
+        height: 30px;
+        margin: 1px;
+        display: inline-block;
+        text-align: center;
+        line-height: 30px;
+    }
+</style>
+</head>
+<body>
+<script>
+    function isPrime(n) {
+        let bPrime = true;
+        let factor = 2;
+        while (factor <= (n / 2)) {
+            if (n % factor == 0) {
+                bPrime = false;
+            }
+            factor++;
+        }
+        return bPrime;
+    }
+
+    const squaresContainer = document.createElement('div');
+    squaresContainer.style.display = 'flex';
+    squaresContainer.style.flexWrap = 'wrap';
+
+    const numbersArray = [];
+    for (let i = 1000; i <= 2000; i++) {
+        numbersArray.push(i);
+    }
+
+    for (let i = 0; i < numbersArray.length; i++) {
+        const square = document.createElement('div');
+        square.classList.add('square');
+        square.textContent = numbersArray[i];
+
+        if (numbersArray[i] % 2 === 0) {
+            square.style.backgroundColor = 'darkred';
+        } else {
+            square.style.backgroundColor = 'lightblue';
+        }
+
+        if (numbersArray[i] % 7 === 0) {
+            square.style.backgroundColor = 'lightcoral';
+        }
+
+        if (isPrime(numbersArray[i])) {
+            square.style.backgroundColor = 'yellow';
+        }
+
+        squaresContainer.appendChild(square);
+    }
+
+    document.body.appendChild(squaresContainer);
+</script>
+</body>
+</html>
